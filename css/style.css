@@ -1880,7 +1880,7 @@ footer {
   color: #2ca6cb;
 }
 .ds-recent-comments li.ds-comment.ds-show-avatars:first-child {
-  border-top: none !important;
+  padding-left: 70px !important;
 }
 .article-content pre,
 .article-content .highlight {
