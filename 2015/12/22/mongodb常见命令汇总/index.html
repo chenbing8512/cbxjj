@@ -9,7 +9,7 @@
     
     <meta name="author" content="chenbing">
     
-    <meta name="description" content="Replica Set 集群搭建中文翻译叫做副本集，不过我并不喜欢把英文翻译成中文，总是感觉怪怪的。其实简单来说就是集群当中包含了多份数据，保证主节点挂掉了，备节点能继续提供数据服务，提供的前提就是数据需要和主节点一致。如下图：        Mongodb(M)表示主节点，Mongodb(S)表示">
+    <meta name="description" content="Replica Set 集群搭建中文翻译叫做副本集，不过我并不喜欢把英文翻译成中文，总是感觉怪怪的。其实简单来说就是集群当中包含了多份数据，保证主节点挂掉了，备节点能继续提供数据服务，提供的前提就是数据需要和主节点一致。如下图：            Mongodb(M)表示主节点，Mongodb(">
     
     
     
@@ -73,7 +73,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-12-22T03:08:38.000Z" itemprop="datePublished">2015-12-22</time>
-    更新日期:<time datetime="2015-12-22T03:39:14.451Z" itemprop="dateModified">2015-12-22</time>
+    更新日期:<time datetime="2015-12-22T03:53:28.806Z" itemprop="dateModified">2015-12-22</time>
     
   </p>
 </header>
@@ -85,7 +85,7 @@
 		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA"><span class="toc-number">1.</span> <span class="toc-text">Replica Set 集群搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939"><span class="toc-number">1.1.</span> <span class="toc-text">建立数据文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6"><span class="toc-number">1.2.</span> <span class="toc-text">建立配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u542F_u52A8mongodb"><span class="toc-number">1.3.</span> <span class="toc-text">启动mongodb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u914D_u7F6E_u4E3B_uFF0C_u5907_uFF0C_u4EF2_u88C1_u8282_u70B9"><span class="toc-number">1.4.</span> <span class="toc-text">配置主，备，仲裁节点</span></a></li></ol></li></ol>
 		</div>
 		
-		<h2 id="Replica_Set__u96C6_u7FA4_u642D_u5EFA"><a href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA" class="headerlink" title="Replica Set 集群搭建"></a>Replica Set 集群搭建</h2><p>中文翻译叫做副本集，不过我并不喜欢把英文翻译成中文，总是感觉怪怪的。其实简单来说就是集群当中包含了多份数据，保证主节点挂掉了，备节点能继续提供数据服务，提供的前提就是数据需要和主节点一致。如下图：<br>    <img src="/cbxjj/2015/12/22/mongodb常见命令汇总/mongdb1.png" alt=" 400 300 副本集结构图" title=" 400 300 副本集结构图"><br>    Mongodb(M)表示主节点，Mongodb(S)表示备节点，Mongodb(A)表示仲裁节点。主备节点存储数据，仲裁节点不存储数据。客户端同时连接主节点与备节点，不连接仲裁节点。<br>默认设置下，主节点提供所有增删查改服务，备节点不提供任何服务。但是可以通过设置使备节点提供查询服务，这样就可以减少主节点的压力，当客户端进行数据查询时，请求自动转到备节点上。这个设置叫做Read Preference Modes，同时Java客户端提供了简单的配置方式，可以不必直接对数据库进行操作。<br>仲裁节点是一种特殊的节点，它本身并不存储数据，主要的作用是决定哪一个备节点在主节点挂掉之后提升为主节点，所以客户端不需要连接此节点。这里虽然只有一个备节点，但是仍然需要一个仲裁节点来提升备节点级别。我开始也不相信必须要有仲裁节点，但是自己也试过没仲裁节点的话，主节点挂了备节点还是备节点，所以咱们还是需要它的。<br>介绍完了集群方案，那么现在就开始搭建了。</p>
+		<h2 id="Replica_Set__u96C6_u7FA4_u642D_u5EFA"><a href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA" class="headerlink" title="Replica Set 集群搭建"></a>Replica Set 集群搭建</h2><p>中文翻译叫做副本集，不过我并不喜欢把英文翻译成中文，总是感觉怪怪的。其实简单来说就是集群当中包含了多份数据，保证主节点挂掉了，备节点能继续提供数据服务，提供的前提就是数据需要和主节点一致。如下图：<br>    <img class="mongdb1.png 400 250 副本集结构图"><br>    <img src="/cbxjj/2015/12/22/mongodb常见命令汇总/mongdb1.png" alt="副本集结构图" title="副本集结构图"><br>    Mongodb(M)表示主节点，Mongodb(S)表示备节点，Mongodb(A)表示仲裁节点。主备节点存储数据，仲裁节点不存储数据。客户端同时连接主节点与备节点，不连接仲裁节点。<br>默认设置下，主节点提供所有增删查改服务，备节点不提供任何服务。但是可以通过设置使备节点提供查询服务，这样就可以减少主节点的压力，当客户端进行数据查询时，请求自动转到备节点上。这个设置叫做Read Preference Modes，同时Java客户端提供了简单的配置方式，可以不必直接对数据库进行操作。<br>仲裁节点是一种特殊的节点，它本身并不存储数据，主要的作用是决定哪一个备节点在主节点挂掉之后提升为主节点，所以客户端不需要连接此节点。这里虽然只有一个备节点，但是仍然需要一个仲裁节点来提升备节点级别。我开始也不相信必须要有仲裁节点，但是自己也试过没仲裁节点的话，主节点挂了备节点还是备节点，所以咱们还是需要它的。<br>介绍完了集群方案，那么现在就开始搭建了。</p>
 <h3 id="u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939"><a href="#u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939" class="headerlink" title="建立数据文件夹"></a>建立数据文件夹</h3><p>一般情况下不会把数据目录建立在mongodb的解压目录下，不过这里方便起见，就建在mongodb解压目录下吧。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mongodb/data/master   &#10;mkdir -p /mongodb/data/slaver   &#10;mkdir -p /mongodb/data/arbiter    &#10;#&#19977;&#20010;&#30446;&#24405;&#20998;&#21035;&#23545;&#24212;&#20027;&#65292;&#22791;&#65292;&#20210;&#35009;&#33410;&#28857;</span><br></pre></td></tr></table></figure></p>
 <h3 id="u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6"><a href="#u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="建立配置文件"></a>建立配置文件</h3><p>由于配置比较多，所以我们将配置写到文件里。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#master.conf&#10;dbpath=/mongodb/data/master&#10;logpath=/mongodb/log/master.log&#10;pidfilepath=/mongodb/master.pid&#10;directoryperdb=true&#10;logappend=true&#10;replSet=testrs&#10;bind_ip=10.10.148.130&#10;port=27017&#10;oplogSize=10000&#10;fork=true&#10;noprealloc=true</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#slaver.conf&#10;dbpath=/mongodb/data/slaver&#10;logpath=/mongodb/log/slaver.log&#10;pidfilepath=/mongodb/slaver.pid&#10;directoryperdb=true&#10;logappend=true&#10;replSet=testrs&#10;bind_ip=10.10.148.131&#10;port=27017&#10;oplogSize=10000&#10;fork=true&#10;noprealloc=true</span><br></pre></td></tr></table></figure>
