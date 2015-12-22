@@ -1,27 +1,44 @@
-(function($) { 
-	// When to show the scroll link
-	// higher number = scroll link appears further down the page：显示返回顶部的位置
-	var upperLimit = 1000;
-	
-	// Our scroll link element
-	var scrollElem = $('#totop');
-   
-	// Scroll to top speed：回滚速度
-	var scrollSpeed = 500;
-   
-	// Show and hide the scroll to top link based on scroll position   
-	scrollElem.hide();
-	$(window).scroll(function () {            
-		var scrollTop = $(document).scrollTop();       
-		if ( scrollTop > upperLimit ) {
-			$(scrollElem).stop().fadeTo(300, 1); // fade back in           
-		}else{       
-			$(scrollElem).stop().fadeTo(300, 0); // fade out
-		}
-	});
+var IMYUAN;
+IMYUAN || (IMYUAN = {});
 
-	// Scroll to top animation on click
-	$(scrollElem).click(function(){
-		$('html, body').animate({scrollTop:0}, scrollSpeed); return false;
-	});
-})(jQuery);
+(function(a) {
+
+    a.fn.extend({
+        returntop: function() {
+            if (this[0]) {
+                var b = this.click(function() {
+                    a("html, body").animate({
+                        scrollTop: 0
+                    },
+                    120)
+                }),
+                c = null;
+                a(window).bind("scroll",
+                function() {
+                    var d = a(document).scrollTop(),
+                    e = a(window).height();
+                    0 < d ? b.css("bottom", "100px") : b.css("bottom", "-150px");
+                    /*a.isIE6() && (b.hide(), clearTimeout(c), c = setTimeout(function() {
+                        b.show();
+                        clearTimeout(c)
+                    },
+                    1E3), b.css("top", d + e - 125))*/
+                })
+            }
+        }
+
+    })
+})(jQuery); 
+
+(function(a) {
+	try{
+		a("body")('<a class="close" href="javascript:;"></a>');
+	}catch(e){
+		
+	}
+})
+
+(function() {
+    $("#returnTop").returntop()
+});
+  
