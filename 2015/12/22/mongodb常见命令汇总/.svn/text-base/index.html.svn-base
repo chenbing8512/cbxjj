@@ -1,0 +1,354 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>mongodb常见命令汇总 | 陈兵的blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="chenbing">
+    
+    <meta name="description" content="Replica Set 集群搭建中文翻译叫做副本集，不过我并不喜欢把英文翻译成中文，总是感觉怪怪的。其实简单来说就是集群当中包含了多份数据，保证主节点挂掉了，备节点能继续提供数据服务，提供的前提就是数据需要和主节点一致。如下图：        Mongodb(M)表示主节点，Mongodb(S)表示">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/cbxjj/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/cbxjj/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/cbxjj/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/cbxjj/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/cbxjj/"><img src="/cbxjj/img/logo.svg" alt="陈兵的blog" title="陈兵的blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/cbxjj/" title="陈兵的blog">陈兵的blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/cbxjj">主页</a></li>
+					
+						<li><a href="/cbxjj/archives">归档</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chenbing8512.github.io/cbxjj">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/cbxjj/2015/12/22/mongodb常见命令汇总/" title="mongodb常见命令汇总" itemprop="url">mongodb常见命令汇总</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://chenbing8512.github.io/cbxjj" title="chenbing">chenbing</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-12-22T03:08:38.000Z" itemprop="datePublished">2015-12-22</time>
+    更新日期:<time datetime="2015-12-22T04:04:05.873Z" itemprop="dateModified">2015-12-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA"><span class="toc-number">1.</span> <span class="toc-text">Replica Set 集群搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939"><span class="toc-number">1.1.</span> <span class="toc-text">建立数据文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6"><span class="toc-number">1.2.</span> <span class="toc-text">建立配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u542F_u52A8mongodb"><span class="toc-number">1.3.</span> <span class="toc-text">启动mongodb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u914D_u7F6E_u4E3B_uFF0C_u5907_uFF0C_u4EF2_u88C1_u8282_u70B9"><span class="toc-number">1.4.</span> <span class="toc-text">配置主，备，仲裁节点</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="Replica_Set__u96C6_u7FA4_u642D_u5EFA"><a href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA" class="headerlink" title="Replica Set 集群搭建"></a>Replica Set 集群搭建</h2><p>中文翻译叫做副本集，不过我并不喜欢把英文翻译成中文，总是感觉怪怪的。其实简单来说就是集群当中包含了多份数据，保证主节点挂掉了，备节点能继续提供数据服务，提供的前提就是数据需要和主节点一致。如下图：<br>    <img src="/cbxjj/2015/12/22/mongodb常见命令汇总/mongdb1.png" alt="副本集结构图" title="副本集结构图"><br>    Mongodb(M)表示主节点，Mongodb(S)表示备节点，Mongodb(A)表示仲裁节点。主备节点存储数据，仲裁节点不存储数据。客户端同时连接主节点与备节点，不连接仲裁节点。<br>默认设置下，主节点提供所有增删查改服务，备节点不提供任何服务。但是可以通过设置使备节点提供查询服务，这样就可以减少主节点的压力，当客户端进行数据查询时，请求自动转到备节点上。这个设置叫做Read Preference Modes，同时Java客户端提供了简单的配置方式，可以不必直接对数据库进行操作。<br>仲裁节点是一种特殊的节点，它本身并不存储数据，主要的作用是决定哪一个备节点在主节点挂掉之后提升为主节点，所以客户端不需要连接此节点。这里虽然只有一个备节点，但是仍然需要一个仲裁节点来提升备节点级别。我开始也不相信必须要有仲裁节点，但是自己也试过没仲裁节点的话，主节点挂了备节点还是备节点，所以咱们还是需要它的。<br>介绍完了集群方案，那么现在就开始搭建了。</p>
+<h3 id="u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939"><a href="#u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939" class="headerlink" title="建立数据文件夹"></a>建立数据文件夹</h3><p>一般情况下不会把数据目录建立在mongodb的解压目录下，不过这里方便起见，就建在mongodb解压目录下吧。<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p /mongodb/<span class="typedef"><span class="keyword">data</span>/master   </span></span><br><span class="line"><span class="title">mkdir</span> -p /mongodb/<span class="typedef"><span class="keyword">data</span>/slaver   </span></span><br><span class="line"><span class="title">mkdir</span> -p /mongodb/<span class="typedef"><span class="keyword">data</span>/arbiter    </span></span><br><span class="line"><span class="preprocessor">#三个目录分别对应主，备，仲裁节点</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6"><a href="#u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="建立配置文件"></a>建立配置文件</h3><p>由于配置比较多，所以我们将配置写到文件里。<br><figure class="highlight ini"><figcaption><span>master.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">dbpath=<span class="value">/mongodb/data/master</span></span></span><br><span class="line"><span class="setting">logpath=<span class="value">/mongodb/log/master.log</span></span></span><br><span class="line"><span class="setting">pidfilepath=<span class="value">/mongodb/master.pid</span></span></span><br><span class="line"><span class="setting">directoryperdb=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">logappend=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">replSet=<span class="value">testrs</span></span></span><br><span class="line"><span class="setting">bind_ip=<span class="value"><span class="number">10.10</span>.<span class="number">148.130</span></span></span></span><br><span class="line"><span class="setting">port=<span class="value"><span class="number">27017</span></span></span></span><br><span class="line"><span class="setting">oplogSize=<span class="value"><span class="number">10000</span></span></span></span><br><span class="line"><span class="setting">fork=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">noprealloc=<span class="value"><span class="keyword">true</span></span></span></span><br></pre></td></tr></table></figure><br><figure class="highlight ini"><figcaption><span>slaver.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">dbpath=<span class="value">/mongodb/data/slaver</span></span></span><br><span class="line"><span class="setting">logpath=<span class="value">/mongodb/log/slaver.log</span></span></span><br><span class="line"><span class="setting">pidfilepath=<span class="value">/mongodb/slaver.pid</span></span></span><br><span class="line"><span class="setting">directoryperdb=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">logappend=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">replSet=<span class="value">testrs</span></span></span><br><span class="line"><span class="setting">bind_ip=<span class="value"><span class="number">10.10</span>.<span class="number">148.131</span></span></span></span><br><span class="line"><span class="setting">port=<span class="value"><span class="number">27017</span></span></span></span><br><span class="line"><span class="setting">oplogSize=<span class="value"><span class="number">10000</span></span></span></span><br><span class="line"><span class="setting">fork=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">noprealloc=<span class="value"><span class="keyword">true</span></span></span></span><br></pre></td></tr></table></figure><br><figure class="highlight ini"><figcaption><span>arbiter.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">dbpath=<span class="value">/mongodb/data/arbiter</span></span></span><br><span class="line"><span class="setting">logpath=<span class="value">/mongodb/log/arbiter.log</span></span></span><br><span class="line"><span class="setting">pidfilepath=<span class="value">/mongodb/arbiter.pid</span></span></span><br><span class="line"><span class="setting">directoryperdb=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">logappend=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">replSet=<span class="value">testrs</span></span></span><br><span class="line"><span class="setting">bind_ip=<span class="value"><span class="number">10.10</span>.<span class="number">148.132</span></span></span></span><br><span class="line"><span class="setting">port=<span class="value"><span class="number">27017</span></span></span></span><br><span class="line"><span class="setting">oplogSize=<span class="value"><span class="number">10000</span></span></span></span><br><span class="line"><span class="setting">fork=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">noprealloc=<span class="value"><span class="keyword">true</span></span></span></span><br></pre></td></tr></table></figure><br>参数解释：<br>dbpath：数据存放目录<br>logpath：日志存放路径<br>pidfilepath：进程文件，方便停止mongodb<br>directoryperdb：为每一个数据库按照数据库名建立文件夹存放<br>logappend：以追加的方式记录日志<br>replSet：replica set的名字<br>bind_ip：mongodb所绑定的ip地址<br>port：mongodb进程所使用的端口号，默认为27017<br>oplogSize：mongodb操作日志文件的最大大小。单位为Mb，默认为硬盘剩余空间的5%<br>fork：以后台方式运行进程<br>noprealloc：不预先分配存储</p>
+<h3 id="u542F_u52A8mongodb"><a href="#u542F_u52A8mongodb" class="headerlink" title="启动mongodb"></a>启动mongodb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mongdb/bin</span><br><span class="line">./monood <span class="operator">-f</span> master.conf</span><br><span class="line">./mongod <span class="operator">-f</span> slaver.conf</span><br><span class="line">./mongod <span class="operator">-f</span> arbiter.conf</span><br></pre></td></tr></table></figure>
+<h3 id="u914D_u7F6E_u4E3B_uFF0C_u5907_uFF0C_u4EF2_u88C1_u8282_u70B9"><a href="#u914D_u7F6E_u4E3B_uFF0C_u5907_uFF0C_u4EF2_u88C1_u8282_u70B9" class="headerlink" title="配置主，备，仲裁节点"></a>配置主，备，仲裁节点</h3><p>进入主节点,做如下操作<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./mongo <span class="number">10.10</span>.<span class="number">148.130</span><span class="symbol">:</span><span class="number">27017</span>   <span class="comment">#ip和port是某个节点的地址</span></span><br><span class="line">&gt;<span class="keyword">use</span> admin  </span><br><span class="line">&gt;cfg=&#123; <span class="constant">_id:</span><span class="string">"testrs"</span>, <span class="symbol">members:</span>[ &#123;<span class="constant">_id:</span><span class="number">0</span>,<span class="symbol">host:</span><span class="string">'10.10.148.130:27017'</span>,<span class="symbol">priority:</span><span class="number">2</span>&#125;, &#123;<span class="constant">_id:</span><span class="number">1</span>,<span class="symbol">host:</span><span class="string">'10.10.148.131:27017'</span>,<span class="symbol">priority:</span><span class="number">1</span>&#125;,   </span><br><span class="line">&#123;<span class="constant">_id:</span><span class="number">2</span>,<span class="symbol">host:</span><span class="string">'10.10.148.132:27017'</span>,<span class="symbol">arbiterOnly:</span><span class="keyword">true</span>&#125;] &#125;;  </span><br><span class="line">&gt;rs.initiate(cfg)             <span class="comment">#使配置生效</span></span><br></pre></td></tr></table></figure></p>
+<p>cfg是可以任意的名字，当然最好不要是mongodb的关键字，conf，config都可以。最外层的_id表示replica set的名字，members里包含的是所有节点的地址以及优先级。优先级最高的即成为主节点，即这里的10.10.148.130:27017。特别注意的是，对于仲裁节点，需要有个特别的配置——arbiterOnly:true。这个千万不能少了，不然主备模式就不能生效。<br>不进入主节点做以上操作，则会报错</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"<span class="attribute">ok</span>" : <span class="value"><span class="number">0</span></span>,</span><br><span class="line">	"<span class="attribute">errmsg</span>" : <span class="value"><span class="string">"replSetReconfig should only be run on PRIMARY, but my state is SECONDARY; use the \"force\" argument to override"</span></span>,</span><br><span class="line">	"<span class="attribute">code</span>" : <span class="value"><span class="number">10107</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>然后执行rs.status()可以查看集群配置信息了<br>rs.reconfig(cfg);重新生效配置</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/cbxjj/tags/mongodb/">mongodb</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/cbxjj/categories/IT技术/">IT技术</a>►<a class="article-category-link" href="/cbxjj/categories/IT技术/数据库/">数据库</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://chenbing8512.github.io/cbxjj/2015/12/22/mongodb常见命令汇总/" data-title="mongodb常见命令汇总 | 陈兵的blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/cbxjj/2015/12/22/test/" title="test">
+  <strong>上一篇:</strong><br/>
+  <span>
+  test</span>
+</a>
+</div>
+
+
+</nav>
+
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA"><span class="toc-number">1.</span> <span class="toc-text">Replica Set 集群搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939"><span class="toc-number">1.1.</span> <span class="toc-text">建立数据文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6"><span class="toc-number">1.2.</span> <span class="toc-text">建立配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u542F_u52A8mongodb"><span class="toc-number">1.3.</span> <span class="toc-text">启动mongodb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u914D_u7F6E_u4E3B_uFF0C_u5907_uFF0C_u4EF2_u88C1_u8282_u70B9"><span class="toc-number">1.4.</span> <span class="toc-text">配置主，备，仲裁节点</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/cbxjj/categories/IT技术/" title="IT技术">IT技术<sup>1</sup></a></li>
+		
+			<li><a href="/cbxjj/categories/IT技术/数据库/" title="数据库">数据库<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/cbxjj/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://chenbing8512.github.io/cbxjj" target="_blank" title="chenbing">chenbing</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/cbxjj/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"cbxjj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/cbxjj/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/cbxjj/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>

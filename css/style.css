@@ -1758,7 +1758,7 @@ footer {
   width: 6.875em;
   height: 6.875em;
   margin: 0 auto;
-  background: no-repeat url("/img/author.jpg") left top;
+  background: no-repeat url("img/author.png") left top;
   -webkit-background-size: 6.875em 6.875em;
   -moz-background-size: 6.875em 6.875em;
   background-size: 6.875em 6.875em;
@@ -1878,6 +1878,9 @@ footer {
 }
 .copyright a:hover {
   color: #2ca6cb;
+}
+.ds-recent-comments li.ds-comment.ds-show-avatars:first-child {
+  border-top: none !important;
 }
 .article-content pre,
 .article-content .highlight {
