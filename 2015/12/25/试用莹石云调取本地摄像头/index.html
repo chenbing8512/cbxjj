@@ -1,70 +1,403 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[chenbing's blog]]></title>
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
   
-  <link href="/cbxjj/atom.xml" rel="self"/>
-  <link href="http://chenbing8512.github.io/cbxjj/"/>
-  <updated>2015-12-25T10:43:25.483Z</updated>
-  <id>http://chenbing8512.github.io/cbxjj/</id>
-  
-  <author>
-    <name><![CDATA[chenbing]]></name>
+    <title>试用莹石云调取本地摄像头 | chenbing&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[试用莹石云调取本地摄像头]]></title>
-    <link href="http://chenbing8512.github.io/cbxjj/2015/12/25/%E8%AF%95%E7%94%A8%E8%8E%B9%E7%9F%B3%E4%BA%91%E8%B0%83%E5%8F%96%E6%9C%AC%E5%9C%B0%E6%91%84%E5%83%8F%E5%A4%B4/"/>
-    <id>http://chenbing8512.github.io/cbxjj/2015/12/25/试用莹石云调取本地摄像头/</id>
-    <published>2015-12-25T10:11:37.000Z</published>
-    <updated>2015-12-25T10:43:25.483Z</updated>
-    <content type="html"><![CDATA[<p>正在做的一个项目里面需要将本地摄像头实时显示到web页面上，选中了<a href="https://www.ys7.com/" target="_blank" rel="external">莹石云</a>这个平台，可以免费试用，只要硬件能和平台对接上。以下为web对接详细:</p>
+    <meta name="author" content="chenbing">
+    
+    <meta name="description" content="正在做的一个项目里面需要将本地摄像头实时显示到web页面上，选中了莹石云这个平台，可以免费试用，只要硬件能和平台对接上。以下为web对接详细:
+首先创建应用https://open.ys7.com/app.html在此地址创建应用然后等待审核通过可以看到本应用的APP Key和Secret Key
+">
+    
+    
+    
+    
+    <link rel="alternate" href="/cbxjj/atom.xml" title="chenbing&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/cbxjj/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/cbxjj/img/author.png">
+    <link rel="apple-touch-icon-precomposed" href="/cbxjj/img/author.png">
+    
+    <link rel="stylesheet" href="/cbxjj/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/cbxjj/"><img src="/cbxjj/img/author.png" alt="chenbing&#39;s blog" title="chenbing&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/cbxjj/" title="chenbing&#39;s blog">chenbing&#39;s blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/cbxjj">主页</a></li>
+					
+						<li><a href="/cbxjj/archives">归档</a></li>
+					
+					<li>
+					
+						<form class="search" action="/cbxjj/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" class="st-default-search-input" maxlength="20" placeholder="搜索" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/cbxjj/2015/12/25/试用莹石云调取本地摄像头/" title="试用莹石云调取本地摄像头" itemprop="url">试用莹石云调取本地摄像头</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://chenbing8512.github.io/cbxjj" title="chenbing">chenbing</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-12-25T10:11:37.000Z" itemprop="datePublished">2015-12-25</time>
+    更新日期:<time datetime="2015-12-25T10:43:25.483Z" itemprop="dateModified">2015-12-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u9996_u5148_u521B_u5EFA_u5E94_u7528"><span class="toc-number">1.</span> <span class="toc-text">首先创建应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A"><span class="toc-number">2.</span> <span class="toc-text">将视频发布到视频广场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A-1"><span class="toc-number">3.</span> <span class="toc-text">将视频发布到视频广场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_u9875_u9762_u663E_u793A_u6444_u50CF_u5934_u754C_u9762"><span class="toc-number">4.</span> <span class="toc-text">html页面显示摄像头界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u9644_u5F55"><span class="toc-number">5.</span> <span class="toc-text">附录</span></a></li></ol>
+		</div>
+		
+		<p>正在做的一个项目里面需要将本地摄像头实时显示到web页面上，选中了<a href="https://www.ys7.com/" target="_blank" rel="external">莹石云</a>这个平台，可以免费试用，只要硬件能和平台对接上。以下为web对接详细:</p>
 <h2 id="u9996_u5148_u521B_u5EFA_u5E94_u7528"><a href="#u9996_u5148_u521B_u5EFA_u5E94_u7528" class="headerlink" title="首先创建应用"></a>首先创建应用</h2><p><a href="https://open.ys7.com/app.html" target="_blank" rel="external">https://open.ys7.com/app.html</a>在此地址创建应用然后等待审核通过<br>可以看到本应用的APP Key和Secret Key</p>
 <h2 id="u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A"><a href="#u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A" class="headerlink" title="将视频发布到视频广场"></a>将视频发布到视频广场</h2><p>让视频迅速加入web而不必自己开发sdk就必须要将摄像头发布到视频广场<br>通过接口3.15(请查看莹石云<a href="https://open.ys7.com/download/doc/ezviz-api-doc_20151026.rar" target="_blank" rel="external">接口文档</a>)将摄像头发布到视频广场<br><figure class="highlight processing"><figcaption><span>获取AccessToken</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> YsyResult getAccessToken() &#123;</span><br><span class="line">	Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; paramsMap = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt;();</span><br><span class="line">	paramsMap.put(<span class="string">"phone"</span>, PHONE);</span><br><span class="line">	Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; <span class="built_in">map</span> = paramsInit(<span class="string">"token/getAccessToken"</span>, paramsMap);</span><br><span class="line">	<span class="keyword">String</span> json = doPost(<span class="built_in">map</span>);</span><br><span class="line">	<span class="keyword">return</span> JSON.parseObject(json, YsyResult.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><figure class="highlight dart"><figcaption><span>发送短信验证码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public <span class="literal">static</span> YsyResult getMsgCode()&#123;</span><br><span class="line">	YsyResult res =  getAccessToken();</span><br><span class="line">	<span class="keyword">if</span>(res.getResult().getCode().equals(<span class="string">"200"</span>))&#123;</span><br><span class="line">		<span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt; data = (<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;) res.getResult().getData();</span><br><span class="line">		<span class="built_in">String</span> accessToken = data.<span class="literal">get</span>(<span class="string">"accessToken"</span>);</span><br><span class="line">		<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">Object</span>&gt; paramsMap = <span class="keyword">new</span> HashMap&lt;<span class="built_in">String</span>, <span class="built_in">Object</span>&gt;();</span><br><span class="line">		paramsMap.put(<span class="string">"accessToken"</span>, accessToken);</span><br><span class="line">		paramsMap.put(<span class="string">"type"</span>, <span class="string">"1"</span>);</span><br><span class="line">		<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">Object</span>&gt; map = paramsInit(<span class="string">"msg/getMsgCode"</span>, paramsMap);</span><br><span class="line">		<span class="built_in">String</span> json = doPost(map);</span><br><span class="line">		<span class="keyword">return</span> JSON.parseObject(json, YsyResult.<span class="keyword">class</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><figure class="highlight applescript"><figcaption><span>分享视频到视频广场</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static YsyResult ShareSquareVideo()&#123;</span><br><span class="line">	Map&lt;String, Object&gt; paramsMap = new HashMap&lt;String, Object&gt;();</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"validateCode"</span>, <span class="string">"验证码"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"deviceSerial"</span>, <span class="string">"设备号"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"channelNo"</span>, <span class="number">1</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"title"</span>, <span class="string">"11"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"description"</span>, <span class="string">"22"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"tag"</span>, <span class="string">"33"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"channel"</span>, <span class="string">"2"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"isOpenSound"</span>, <span class="string">"1"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"timerEnabled"</span>, <span class="string">"1"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"timerPeriod"</span>, <span class="string">"0,1,2,3,4,5,6"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"timerStart"</span>, <span class="string">"00:00"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"timerEnd"</span>, <span class="string">"23:59"</span>);</span><br><span class="line">	paramsMap.<span class="keyword">put</span>(<span class="string">"thirdComment"</span>, <span class="string">"xxx"</span>);</span><br><span class="line">	Map&lt;String, Object&gt; map = paramsInit(<span class="string">"square/share"</span>, paramsMap);</span><br><span class="line">	String json = doPost(map);</span><br><span class="line"><span class="command">	return</span> JSON.parseObject(json, YsyResult.<span class="type">class</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>然后等待审核通过</p>
 <h2 id="u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A-1"><a href="#u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A-1" class="headerlink" title="将视频发布到视频广场"></a>将视频发布到视频广场</h2><p>通过3.16接口查看自己发布的摄像头信息<br><figure class="highlight processing"><figcaption><span>获取管理员发布的视频广场的公共视频资源</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> YsyResult SquareVideoListByUser()&#123;</span><br><span class="line">	Gson gson = <span class="keyword">new</span> Gson();</span><br><span class="line">	Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; paramsMap = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt;();</span><br><span class="line">	paramsMap.put(<span class="string">"pageSize"</span>, <span class="string">"20"</span>);</span><br><span class="line">	paramsMap.put(<span class="string">"pageStart"</span>, <span class="string">"0"</span>);</span><br><span class="line">	Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; <span class="built_in">map</span> = paramsInit(<span class="string">"squareVideoListByUser"</span>, paramsMap);</span><br><span class="line">	<span class="keyword">String</span> json = doPost(<span class="built_in">map</span>);</span><br><span class="line">	<span class="keyword">return</span> gson.fromJson(json, YsyResult.class);</span><br><span class="line">	<span class="comment">//return JSON.parseObject(json, YsyResult.class);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>返回信息如下：<br><figure class="highlight json"><figcaption><span>返回的json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">result</span>":<span class="value">&#123;"<span class="attribute">page</span>":<span class="value">&#123;"<span class="attribute">total</span>":<span class="value"><span class="number">1</span></span>,"<span class="attribute">page</span>":<span class="value"><span class="number">1</span></span>,"<span class="attribute">size</span>":<span class="value"><span class="number">20</span></span>&#125;</span>,"<span class="attribute">data</span>":<span class="value">[&#123;"<span class="attribute">squareId</span>":<span class="value"><span class="string">"xxxxxx"</span></span>,"<span class="attribute">title</span>":<span class="value"><span class="string">"xxx"</span></span>,"<span class="attribute">address</span>":<span class="value"><span class="string">"xxxx"</span></span>,"<span class="attribute">viewedCount</span>":<span class="value"><span class="number">161</span></span>,"<span class="attribute">likeCount</span>":<span class="value"><span class="number">1</span></span>,"<span class="attribute">commentCount</span>":<span class="value"><span class="number">0</span></span>,"<span class="attribute">favoriteCount</span>":<span class="value"><span class="number">3</span></span>,"<span class="attribute">coverUrl</span>":<span class="value"><span class="string">""</span></span>,"<span class="attribute">playUrl</span>":<span class="value"><span class="string">""</span></span>,"<span class="attribute">m3u8Url</span>":<span class="value"><span class="string">""</span></span>,"<span class="attribute">iframeUrl</span>":<span class="value"><span class="string">""</span></span>,"<span class="attribute">rtmpUrl</span>":<span class="value"><span class="string">""</span></span>,"<span class="attribute">longitude</span>":<span class="value"><span class="string">""</span></span>,"<span class="attribute">latitude</span>":<span class="value"><span class="string">""</span></span>&#125;]</span>,"<span class="attribute">code</span>":<span class="value"><span class="string">"200"</span></span>,"<span class="attribute">msg</span>":<span class="value"><span class="string">"操作成功!"</span></span>&#125;</span>&#125;</span><br></pre></td></tr></table></figure><br>在web页面查看只需要rtmpUrl即可</p>
 <h2 id="html_u9875_u9762_u663E_u793A_u6444_u50CF_u5934_u754C_u9762"><a href="#html_u9875_u9762_u663E_u793A_u6444_u50CF_u5934_u754C_u9762" class="headerlink" title="html页面显示摄像头界面"></a>html页面显示摄像头界面</h2><p>这里我使用的一个工具<a href="http://www.sewise.com/?mod=index&amp;do=product&amp;key=7" target="_blank" rel="external">sewise player</a><br>主页上文档很详细<br>最终html页面如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=edge,chrome=1"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span></span><br><span class="line">	<span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">title</span>&gt;</span>Sewise Player<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"../js/jquery-1.9.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"></span><br><span class="line"><span class="tag">html</span>,<span class="tag">body</span> <span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">0px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"height: 100%"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"../player/sewise.player.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">			$.ajax(&#123;</span><br><span class="line">				type : <span class="string">"POST"</span>,</span><br><span class="line">				url : <span class="string">"../ajaxDataAction.do?action=getCameraUrl"</span>,</span><br><span class="line">				dataType : <span class="string">"json"</span>,</span><br><span class="line">				success : <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">					<span class="keyword">if</span> (res.statusCode == <span class="string">"0"</span>) &#123;</span><br><span class="line">						<span class="keyword">var</span> rtmpUrl = res.result.rtmpUrl;</span><br><span class="line">						SewisePlayer.setup(&#123;</span><br><span class="line">							server : <span class="string">"live"</span>,</span><br><span class="line">							type : <span class="string">"rtmp"</span>,</span><br><span class="line">							skin : <span class="string">"liveWhite"</span>,</span><br><span class="line">							streamurl : rtmpUrl,</span><br><span class="line">							title : <span class="string">""</span>,</span><br><span class="line">							lang : <span class="string">'zh_CN'</span></span><br><span class="line">						&#125;);</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						alert(res.errorMsg);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				error : <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure><br>试用效果如下:<br><img src="/cbxjj/2015/12/25/试用莹石云调取本地摄像头/ysy.png" alt="莹石云效果图" title="莹石云效果图"></p>
 <h2 id="u9644_u5F55"><a href="#u9644_u5F55" class="headerlink" title="附录"></a>附录</h2><figure class="highlight processing"><figcaption><span>参数初始化</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; paramsInit(<span class="keyword">String</span> method,</span><br><span class="line">			Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; paramsMap) &#123;</span><br><span class="line">	Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; <span class="built_in">map</span> = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt;();</span><br><span class="line">	<span class="keyword">long</span> time = System.currentTimeMillis() / <span class="number">1000</span>;</span><br><span class="line">	StringBuilder paramString = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">	List&lt;<span class="keyword">String</span>&gt; paramList = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();</span><br><span class="line">	<span class="keyword">for</span> (Iterator&lt;<span class="keyword">String</span>&gt; it = paramsMap.keySet().iterator(); it.hasNext();) &#123;</span><br><span class="line">		<span class="keyword">String</span> key1 = it.next();</span><br><span class="line">		<span class="keyword">String</span> param = key1 + <span class="string">":"</span> + paramsMap.<span class="built_in">get</span>(key1);</span><br><span class="line">		paramList.<span class="built_in">add</span>(param);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">String</span>[] params = paramList.toArray(<span class="keyword">new</span> <span class="keyword">String</span>[paramList.<span class="built_in">size</span>()]);</span><br><span class="line">	Arrays.<span class="built_in">sort</span>(params);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">String</span> param : params) &#123;</span><br><span class="line">		paramString.<span class="built_in">append</span>(param).<span class="built_in">append</span>(<span class="string">","</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	paramString.<span class="built_in">append</span>(<span class="string">"method"</span>).<span class="built_in">append</span>(<span class="string">":"</span>).<span class="built_in">append</span>(method).<span class="built_in">append</span>(<span class="string">","</span>);</span><br><span class="line">	paramString.<span class="built_in">append</span>(<span class="string">"time"</span>).<span class="built_in">append</span>(<span class="string">":"</span>).<span class="built_in">append</span>(time).<span class="built_in">append</span>(<span class="string">","</span>);</span><br><span class="line">	paramString.<span class="built_in">append</span>(<span class="string">"secret"</span>).<span class="built_in">append</span>(<span class="string">":"</span>).<span class="built_in">append</span>(SECRETKEY);</span><br><span class="line">	<span class="keyword">String</span> sign = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		sign = DigestUtils.md5Hex(paramString.toString().<span class="built_in">trim</span>()</span><br><span class="line">				.getBytes(<span class="string">"UTF-8"</span>));</span><br><span class="line">	&#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; systemMap = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt;();</span><br><span class="line">	systemMap.put(<span class="string">"ver"</span>, <span class="string">"1.0"</span>);</span><br><span class="line">	systemMap.put(<span class="string">"sign"</span>, sign);</span><br><span class="line">	systemMap.put(<span class="string">"key"</span>, APPKEY);</span><br><span class="line">	systemMap.put(<span class="string">"time"</span>, time);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">map</span>.put(<span class="string">"system"</span>, systemMap);</span><br><span class="line">	<span class="built_in">map</span>.put(<span class="string">"method"</span>, method);</span><br><span class="line">	<span class="built_in">map</span>.put(<span class="string">"params"</span>, paramsMap);</span><br><span class="line">	<span class="built_in">map</span>.put(<span class="string">"id"</span>, <span class="string">"123456"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">map</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>http请求接口试用了httpclient4，莹石云demo里面用的httpclient3，再tomcat里面试用有乱码问题，这里修改为httpclient4<br><figure class="highlight nimrod"><figcaption><span>http请求接口</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">private <span class="keyword">static</span> <span class="type">String</span> doPost(<span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">Object</span>&gt; map) &#123;</span><br><span class="line">	<span class="type">String</span> json = <span class="type">JSON</span>.toJSONString(map);</span><br><span class="line">	<span class="type">ProtocolSocketFactory</span> fcty = new <span class="type">MySecureProtocolSocketFactory</span>();</span><br><span class="line">	<span class="type">Protocol</span>.registerProtocol(<span class="string">"https"</span>, new <span class="type">Protocol</span>(<span class="string">"https"</span>, fcty, <span class="number">443</span>));</span><br><span class="line">	<span class="type">DefaultHttpClient</span> client = new <span class="type">DefaultHttpClient</span>();</span><br><span class="line">	<span class="type">HttpPost</span> post = new <span class="type">HttpPost</span>(<span class="string">"https://open.ys7.com:443/api/method"</span>);</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="type">StringEntity</span> requestEntity = new <span class="type">StringEntity</span>(json,<span class="string">"utf-8"</span>);</span><br><span class="line">		requestEntity.setContentEncoding(<span class="string">"UTF-8"</span>);    	        </span><br><span class="line">		post.setHeader(<span class="string">"Content-type"</span>, <span class="string">"application/json"</span>);</span><br><span class="line">		post.setEntity(requestEntity);</span><br><span class="line">		</span><br><span class="line">		<span class="type">HttpResponse</span> response = client.execute(post);</span><br><span class="line">		<span class="keyword">if</span>(response.getStatusLine().getStatusCode() == <span class="type">HttpStatus</span>.<span class="type">SC_OK</span>)&#123;</span><br><span class="line">			<span class="type">HttpEntity</span> entityD = response.getEntity();</span><br><span class="line">			<span class="type">String</span> <span class="literal">result</span> = <span class="type">EntityUtils</span>.toString(entityD, <span class="string">"UTF-8"</span>);</span><br><span class="line">			<span class="type">System</span>.<span class="keyword">out</span>.println(<span class="literal">result</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">result</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> null;</span><br><span class="line">	&#125; catch (<span class="type">Exception</span> e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">		post.abort();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>正在做的一个项目里面需要将本地摄像头实时显示到web页面上，选中了<a href="https://www.ys7.com/" target="_blank" rel="external">莹石云</a>这个平台，可以免费试用，只要硬件能和平台对接上。以下为web对接详细:]]>
-    </summary>
-    
-      <category term="莹石云" scheme="http://chenbing8512.github.io/cbxjj/tags/%E8%8E%B9%E7%9F%B3%E4%BA%91/"/>
-    
-      <category term="IT技术" scheme="http://chenbing8512.github.io/cbxjj/categories/IT%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="莹石云" scheme="http://chenbing8512.github.io/cbxjj/categories/IT%E6%8A%80%E6%9C%AF/%E8%8E%B9%E7%9F%B3%E4%BA%91/"/>
-    
-  </entry>
   
-  <entry>
-    <title><![CDATA[mongodb常见命令汇总]]></title>
-    <link href="http://chenbing8512.github.io/cbxjj/2015/12/22/mongodb%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/"/>
-    <id>http://chenbing8512.github.io/cbxjj/2015/12/22/mongodb常见命令汇总/</id>
-    <published>2015-12-22T03:08:38.000Z</published>
-    <updated>2015-12-22T06:51:48.137Z</updated>
-    <content type="html"><![CDATA[<h2 id="Replica_Set__u96C6_u7FA4_u642D_u5EFA"><a href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA" class="headerlink" title="Replica Set 集群搭建"></a>Replica Set 集群搭建</h2><p>中文翻译叫做副本集，不过我并不喜欢把英文翻译成中文，总是感觉怪怪的。其实简单来说就是集群当中包含了多份数据，保证主节点挂掉了，备节点能继续提供数据服务，提供的前提就是数据需要和主节点一致。如下图：<br>    <img src="/cbxjj/2015/12/22/mongodb常见命令汇总/mongdb1.png" alt="副本集结构图" title="副本集结构图"><br>    Mongodb(M)表示主节点，Mongodb(S)表示备节点，Mongodb(A)表示仲裁节点。主备节点存储数据，仲裁节点不存储数据。客户端同时连接主节点与备节点，不连接仲裁节点。<br>默认设置下，主节点提供所有增删查改服务，备节点不提供任何服务。但是可以通过设置使备节点提供查询服务，这样就可以减少主节点的压力，当客户端进行数据查询时，请求自动转到备节点上。这个设置叫做Read Preference Modes，同时Java客户端提供了简单的配置方式，可以不必直接对数据库进行操作。<br>仲裁节点是一种特殊的节点，它本身并不存储数据，主要的作用是决定哪一个备节点在主节点挂掉之后提升为主节点，所以客户端不需要连接此节点。这里虽然只有一个备节点，但是仍然需要一个仲裁节点来提升备节点级别。我开始也不相信必须要有仲裁节点，但是自己也试过没仲裁节点的话，主节点挂了备节点还是备节点，所以咱们还是需要它的。<br>介绍完了集群方案，那么现在就开始搭建了。</p>
-<h3 id="u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939"><a href="#u5EFA_u7ACB_u6570_u636E_u6587_u4EF6_u5939" class="headerlink" title="建立数据文件夹"></a>建立数据文件夹</h3><p>一般情况下不会把数据目录建立在mongodb的解压目录下，不过这里方便起见，就建在mongodb解压目录下吧。<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p /mongodb/<span class="typedef"><span class="keyword">data</span>/master   </span></span><br><span class="line"><span class="title">mkdir</span> -p /mongodb/<span class="typedef"><span class="keyword">data</span>/slaver   </span></span><br><span class="line"><span class="title">mkdir</span> -p /mongodb/<span class="typedef"><span class="keyword">data</span>/arbiter    </span></span><br><span class="line"><span class="preprocessor">#三个目录分别对应主，备，仲裁节点</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6"><a href="#u5EFA_u7ACB_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="建立配置文件"></a>建立配置文件</h3><p>由于配置比较多，所以我们将配置写到文件里。<br><figure class="highlight ini"><figcaption><span>master.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">dbpath=<span class="value">/mongodb/data/master</span></span></span><br><span class="line"><span class="setting">logpath=<span class="value">/mongodb/log/master.log</span></span></span><br><span class="line"><span class="setting">pidfilepath=<span class="value">/mongodb/master.pid</span></span></span><br><span class="line"><span class="setting">directoryperdb=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">logappend=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">replSet=<span class="value">testrs</span></span></span><br><span class="line"><span class="setting">bind_ip=<span class="value"><span class="number">10.10</span>.<span class="number">148.130</span></span></span></span><br><span class="line"><span class="setting">port=<span class="value"><span class="number">27017</span></span></span></span><br><span class="line"><span class="setting">oplogSize=<span class="value"><span class="number">10000</span></span></span></span><br><span class="line"><span class="setting">fork=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">noprealloc=<span class="value"><span class="keyword">true</span></span></span></span><br></pre></td></tr></table></figure><br><figure class="highlight ini"><figcaption><span>slaver.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">dbpath=<span class="value">/mongodb/data/slaver</span></span></span><br><span class="line"><span class="setting">logpath=<span class="value">/mongodb/log/slaver.log</span></span></span><br><span class="line"><span class="setting">pidfilepath=<span class="value">/mongodb/slaver.pid</span></span></span><br><span class="line"><span class="setting">directoryperdb=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">logappend=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">replSet=<span class="value">testrs</span></span></span><br><span class="line"><span class="setting">bind_ip=<span class="value"><span class="number">10.10</span>.<span class="number">148.131</span></span></span></span><br><span class="line"><span class="setting">port=<span class="value"><span class="number">27017</span></span></span></span><br><span class="line"><span class="setting">oplogSize=<span class="value"><span class="number">10000</span></span></span></span><br><span class="line"><span class="setting">fork=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">noprealloc=<span class="value"><span class="keyword">true</span></span></span></span><br></pre></td></tr></table></figure><br><figure class="highlight ini"><figcaption><span>arbiter.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">dbpath=<span class="value">/mongodb/data/arbiter</span></span></span><br><span class="line"><span class="setting">logpath=<span class="value">/mongodb/log/arbiter.log</span></span></span><br><span class="line"><span class="setting">pidfilepath=<span class="value">/mongodb/arbiter.pid</span></span></span><br><span class="line"><span class="setting">directoryperdb=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">logappend=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">replSet=<span class="value">testrs</span></span></span><br><span class="line"><span class="setting">bind_ip=<span class="value"><span class="number">10.10</span>.<span class="number">148.132</span></span></span></span><br><span class="line"><span class="setting">port=<span class="value"><span class="number">27017</span></span></span></span><br><span class="line"><span class="setting">oplogSize=<span class="value"><span class="number">10000</span></span></span></span><br><span class="line"><span class="setting">fork=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">noprealloc=<span class="value"><span class="keyword">true</span></span></span></span><br></pre></td></tr></table></figure><br>参数解释：<br>dbpath：数据存放目录<br>logpath：日志存放路径<br>pidfilepath：进程文件，方便停止mongodb<br>directoryperdb：为每一个数据库按照数据库名建立文件夹存放<br>logappend：以追加的方式记录日志<br>replSet：replica set的名字<br>bind_ip：mongodb所绑定的ip地址<br>port：mongodb进程所使用的端口号，默认为27017<br>oplogSize：mongodb操作日志文件的最大大小。单位为Mb，默认为硬盘剩余空间的5%<br>fork：以后台方式运行进程<br>noprealloc：不预先分配存储</p>
-<h3 id="u542F_u52A8mongodb"><a href="#u542F_u52A8mongodb" class="headerlink" title="启动mongodb"></a>启动mongodb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mongdb/bin</span><br><span class="line">./monood <span class="operator">-f</span> master.conf</span><br><span class="line">./mongod <span class="operator">-f</span> slaver.conf</span><br><span class="line">./mongod <span class="operator">-f</span> arbiter.conf</span><br></pre></td></tr></table></figure>
-<h3 id="u914D_u7F6E_u4E3B_uFF0C_u5907_uFF0C_u4EF2_u88C1_u8282_u70B9"><a href="#u914D_u7F6E_u4E3B_uFF0C_u5907_uFF0C_u4EF2_u88C1_u8282_u70B9" class="headerlink" title="配置主，备，仲裁节点"></a>配置主，备，仲裁节点</h3><p>进入主节点,做如下操作<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./mongo <span class="number">10.10</span>.<span class="number">148.130</span><span class="symbol">:</span><span class="number">27017</span>   <span class="comment">#ip和port是某个节点的地址</span></span><br><span class="line">&gt;<span class="keyword">use</span> admin  </span><br><span class="line">&gt;cfg=&#123; <span class="constant">_id:</span><span class="string">"testrs"</span>, <span class="symbol">members:</span>[ &#123;<span class="constant">_id:</span><span class="number">0</span>,<span class="symbol">host:</span><span class="string">'10.10.148.130:27017'</span>,<span class="symbol">priority:</span><span class="number">2</span>&#125;, &#123;<span class="constant">_id:</span><span class="number">1</span>,<span class="symbol">host:</span><span class="string">'10.10.148.131:27017'</span>,<span class="symbol">priority:</span><span class="number">1</span>&#125;,   </span><br><span class="line">&#123;<span class="constant">_id:</span><span class="number">2</span>,<span class="symbol">host:</span><span class="string">'10.10.148.132:27017'</span>,<span class="symbol">arbiterOnly:</span><span class="keyword">true</span>&#125;] &#125;;  </span><br><span class="line">&gt;rs.initiate(cfg)             <span class="comment">#使配置生效</span></span><br></pre></td></tr></table></figure></p>
-<p>cfg是可以任意的名字，当然最好不要是mongodb的关键字，conf，config都可以。最外层的_id表示replica set的名字，members里包含的是所有节点的地址以及优先级。优先级最高的即成为主节点，即这里的10.10.148.130:27017。特别注意的是，对于仲裁节点，需要有个特别的配置——arbiterOnly:true。这个千万不能少了，不然主备模式就不能生效。<br>不进入主节点做以上操作，则会报错</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"<span class="attribute">ok</span>" : <span class="value"><span class="number">0</span></span>,</span><br><span class="line">	"<span class="attribute">errmsg</span>" : <span class="value"><span class="string">"replSetReconfig should only be run on PRIMARY, but my state is SECONDARY; use the \"force\" argument to override"</span></span>,</span><br><span class="line">	"<span class="attribute">code</span>" : <span class="value"><span class="number">10107</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
-<p>然后执行rs.status()可以查看集群配置信息了<br>rs.reconfig(cfg);重新生效配置</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="Replica_Set__u96C6_u7FA4_u642D_u5EFA"><a href="#Replica_Set__u96C6_u7FA4_u642D_u5EFA" class="headerlink" title="Replica Set 集群搭建"></]]>
-    </summary>
-    
-      <category term="mongodb" scheme="http://chenbing8512.github.io/cbxjj/tags/mongodb/"/>
-    
-      <category term="IT技术" scheme="http://chenbing8512.github.io/cbxjj/categories/IT%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="数据库" scheme="http://chenbing8512.github.io/cbxjj/categories/IT%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
   
-</feed>
+  <span></span> <a href="/cbxjj/tags/莹石云/">莹石云</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/cbxjj/categories/IT技术/">IT技术</a>►<a class="article-category-link" href="/cbxjj/categories/IT技术/莹石云/">莹石云</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://chenbing8512.github.io/cbxjj/2015/12/25/试用莹石云调取本地摄像头/" data-title="试用莹石云调取本地摄像头 | chenbing&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/cbxjj/2015/12/22/mongodb常见命令汇总/"  title="mongodb常见命令汇总">
+ <strong>下一篇:</strong><br/>
+ <span>mongodb常见命令汇总
+</span>
+</a>
+</div>
+
+</nav>
+
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u9996_u5148_u521B_u5EFA_u5E94_u7528"><span class="toc-number">1.</span> <span class="toc-text">首先创建应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A"><span class="toc-number">2.</span> <span class="toc-text">将视频发布到视频广场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5C06_u89C6_u9891_u53D1_u5E03_u5230_u89C6_u9891_u5E7F_u573A-1"><span class="toc-number">3.</span> <span class="toc-text">将视频发布到视频广场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html_u9875_u9762_u663E_u793A_u6444_u50CF_u5934_u754C_u9762"><span class="toc-number">4.</span> <span class="toc-text">html页面显示摄像头界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u9644_u5F55"><span class="toc-number">5.</span> <span class="toc-text">附录</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/cbxjj/categories/IT技术/" title="IT技术">IT技术<sup>2</sup></a></li>
+		
+			<li><a href="/cbxjj/categories/IT技术/数据库/" title="数据库">数据库<sup>1</sup></a></li>
+		
+			<li><a href="/cbxjj/categories/IT技术/莹石云/" title="莹石云">莹石云<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/cbxjj/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+		
+			<li><a href="/cbxjj/tags/莹石云/" title="莹石云">莹石云<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/cbxjj/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/cbxjj/tags/莹石云/" style="font-size: 10px;">莹石云</a>
+    </div>
+  </div>
+
+
+  <div class="tagslist">
+  <p class="asidetitle">最新评论</p>
+  <div class="entry">
+<!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="30"></div>
+<!-- 多说最新评论 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cbxjj"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+  </div>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/cbxjj/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://chenbing8512.github.io/cbxjj" target="_blank" title="chenbing">chenbing</a>
+		
+		</p>
+		<script type="text/javascript">
+		  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+		  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+		  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+		  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+		
+		  _st('install','bqvbse2y8PQ6VAym1soa','2.0.0');
+		</script>
+</div>
+</footer>
+    <script src="/cbxjj/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"cbxjj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/cbxjj/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/cbxjj/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+<a id="returnTop" href="javascript:;">回到顶部</a>
+<script src="/cbxjj/js/totop.js"></script>
+
+
+  </body>
+</html>
