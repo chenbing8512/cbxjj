@@ -4,7 +4,7 @@
   
   <link href="/cbxjj/atom.xml" rel="self"/>
   <link href="http://chenbing8512.github.io/cbxjj/"/>
-  <updated>2015-12-25T10:43:25.483Z</updated>
+  <updated>2015-12-28T03:40:59.381Z</updated>
   <id>http://chenbing8512.github.io/cbxjj/</id>
   
   <author>
@@ -13,6 +13,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[java jar包备份]]></title>
+    <link href="http://chenbing8512.github.io/cbxjj/2015/12/28/java-jars-backup/"/>
+    <id>http://chenbing8512.github.io/cbxjj/2015/12/28/java-jars-backup/</id>
+    <published>2015-12-28T03:30:32.000Z</published>
+    <updated>2015-12-28T03:40:59.381Z</updated>
+    <content type="html"><![CDATA[<p><a href="/cbxjj/2015/12/28/java-jars-backup/DJNativeSwing-SWT-1-0-3-20140708.zip" title="DJNativeSwing-SWT">DJNativeSwing-SWT</a> 是一个跨平台的浏览器、Flash播放器、HTML编辑器和多媒体播放器组件。<br><a href="/cbxjj/2015/12/28/java-jars-backup/bootstrap-3.3.5-dist.zip" title="bootstrap">bootstrap</a> 简洁、直观、强悍、移动设备优先的前端开发框架。<br><a href="/cbxjj/2015/12/28/java-jars-backup/fancyapps-fancyBox-v2.1.5-0-ge2248f4.zip" title="fancybox">fancybox</a> 是一款优秀的jquery插件,它能够展示丰富的弹出层效果。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="/cbxjj/2015/12/28/java-jars-backup/DJNativeSwing-SWT-1-0-3-20140708.zip" title="DJNativeSwing-SWT">DJNativeSwing-SWT</a> 是一个跨平台的]]>
+    </summary>
+    
+      <category term="jar" scheme="http://chenbing8512.github.io/cbxjj/tags/jar/"/>
+    
+      <category term="java" scheme="http://chenbing8512.github.io/cbxjj/tags/java/"/>
+    
+      <category term="IT技术" scheme="http://chenbing8512.github.io/cbxjj/categories/IT%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[试用莹石云调取本地摄像头]]></title>
