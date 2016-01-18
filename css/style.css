@@ -101,8 +101,8 @@ a img {
   height: 65px;
   text-indent: -999px;
   overflow: hidden;
-  background-image: url("/cbxjj/img/scrollup.png");
-  _background-image: url("/cbxjj/img/scrollup.png");
+  background-image: url("/img/scrollup.png");
+  _background-image: url("/img/scrollup.png");
   background-repeat: no-repeat;
   background-position: 0 0;
   -webkit-transition: bottom 0.9s;
@@ -1799,7 +1799,7 @@ footer {
   width: 6.875em;
   height: 6.875em;
   margin: 0 auto;
-  background: no-repeat url("/cbxjj/img/pacman.jpg") left top;
+  background: no-repeat url("/img/pacman.jpg") left top;
   -webkit-background-size: 6.875em 6.875em;
   -moz-background-size: 6.875em 6.875em;
   background-size: 6.875em 6.875em;
