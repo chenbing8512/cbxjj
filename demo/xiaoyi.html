@@ -1,0 +1,117 @@
+
+  
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta http-equiv="X-Frame-Options" content="ALLOW-FROM http://cbxjj.cn/2016/01/12/use-baiduMap-and-echarts-establish-new-region-map/"> 
+<title>公司分布图</title>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=syIta7eq5Xiv5nNsE75RdGkG"></script>
+<script language="Javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script language="Javascript" src="http://echarts.baidu.com/echarts2/doc/example/www/js/echarts.js"></script>
+<script type="text/javascript">
+	var option = {
+			title : {
+				text : '',
+				x : 'center'
+			},
+			tooltip : {
+				trigger : 'item'
+			},
+		    dataRange: {
+		        min: 0,
+		        max: 2500,
+		        x: 'left',
+		        y: 'bottom',
+		        text:['高','低'],           // 文本，默认为数值文本
+		        calculable : true
+		    },
+			toolbox : {
+				show : false,
+				orient : 'vertical',
+				x : 'right',
+				y : 'center',
+				feature : {
+					mark : {
+						show : true
+					},
+					dataView : {
+						show : true,
+						readOnly : false
+					},
+					restore : {
+						show : true
+					},
+					saveAsImage : {
+						show : true
+					}
+				}
+			},
+			series : [ {
+					name : '单位数量',
+					type : 'map',
+					mapType : '合肥市',
+					selectedMode : 'single',
+					roam : false,
+					itemStyle: {
+		                normal:{label:{show:true}},
+		                emphasis:{label:{show:true}}
+		            },
+					data:[
+		                {name: '北京',value: Math.round(Math.random()*1000)}
+		            ]
+				}
+			]
+		};
+
+	require.config({
+				paths : {
+					'echarts' : 'http://echarts.baidu.com/build/dist',
+					'echarts/chart/map' : 'http://echarts.baidu.com/echarts2/doc/example/www/js/chart/map',
+			        'echarts/util/mapData/params':'http://echarts.baidu.com/echarts2/src/util/mapData/params'
+				}
+			});
+
+	window.onresize = resize;
+
+	function resize(){
+		var bodyW = $(window).width();
+		var bodyH = $(window).height();
+		$("#map").css({
+			width: 800,
+			height:450
+		});
+	}
+
+	$(document).ready(function(){
+		resize();
+		var name = option.series[0].mapType;
+		//加载全国和市地图
+    	require([ 'echarts', 'echarts/chart/map' ], function(ec){               	    
+        	var mapGeoData = require('echarts/util/mapData/params');
+    	    // 自定义扩展图表类型
+    	    mapGeoData.params[name] = {
+        	        getGeoJson: (function (c) {
+						var code = '141112';
+//						var code = cityMap[c];
+        	            return function (callback) {
+        	                $.getJSON(code+'.json', callback);
+        	            }
+        	        })(name)
+    	    };
+    		var domMain = document.getElementById('map');
+    		myChart = ec.init(domMain, "");
+    		window.onresize = myChart.resize;
+    		myChart.setOption(option)
+    	});
+
+	});
+	
+</script>
+</head>
+<body><div id="map"></div>
+</body>
+</html>
+
+  
