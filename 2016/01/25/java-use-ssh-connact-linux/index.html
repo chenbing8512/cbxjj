@@ -1,0 +1,419 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>java连接ssh并使用shell命令 | chenbing&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="chenbing">
+    
+    <meta name="description" content="直接上代码了123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="chenbing&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/author.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/author.png" alt="chenbing&#39;s blog" title="chenbing&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="chenbing&#39;s blog">chenbing&#39;s blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" class="st-default-search-input" maxlength="20" placeholder="搜索" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/25/java-use-ssh-connact-linux/" title="java连接ssh并使用shell命令" itemprop="url">java连接ssh并使用shell命令</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://chenbing8512.github.io/cbxjj" title="chenbing">chenbing</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-01-25T03:41:48.000Z" itemprop="datePublished">2016-01-25</time>
+    更新日期:<time datetime="2016-01-25T03:52:15.471Z" itemprop="dateModified">2016-01-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p>直接上代码了<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Ssh;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.jcraft.jsch.ChannelShell;</span><br><span class="line"><span class="keyword">import</span> com.jcraft.jsch.JSch;</span><br><span class="line"><span class="keyword">import</span> com.jcraft.jsch.Session;</span><br><span class="line"><span class="keyword">import</span> com.jcraft.jsch.UserInfo;</span><br><span class="line"><span class="keyword">import</span> expect4j.Closure;</span><br><span class="line"><span class="keyword">import</span> expect4j.Expect4j;</span><br><span class="line"><span class="keyword">import</span> expect4j.ExpectState;</span><br><span class="line"><span class="keyword">import</span> expect4j.matches.EofMatch;</span><br><span class="line"><span class="keyword">import</span> expect4j.matches.Match;</span><br><span class="line"><span class="keyword">import</span> expect4j.matches.RegExpMatch;</span><br><span class="line"><span class="keyword">import</span> expect4j.matches.TimeoutMatch;</span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.apache.oro.<span class="built_in">text</span>.regex.MalformedPatternException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Hashtable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by Administrator on 2016/1/25.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> class SshConnectTest &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger <span class="built_in">log</span> = Logger.getLogger(SshConnectTest.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Session session;</span><br><span class="line">    <span class="keyword">private</span> ChannelShell channel;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Expect4j expect = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> defaultTimeOut = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">private</span> StringBuffer buffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> COMMAND_EXECUTION_SUCCESS_OPCODE = -<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> BACKSLASH_R = <span class="string">"\r"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> BACKSLASH_N = <span class="string">"\n"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> COLON_CHAR = <span class="string">":"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> ENTER_CHARACTER = BACKSLASH_R;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> SSH_PORT = <span class="number">22</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//正则匹配，用于处理服务器返回的结果</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span>[] linuxPromptRegEx = <span class="keyword">new</span> <span class="keyword">String</span>[]&#123;<span class="string">"~]#"</span>, <span class="string">"~#"</span>, <span class="string">"#"</span>,</span><br><span class="line">            <span class="string">":~#"</span>, <span class="string">"/$"</span>, <span class="string">"&gt;"</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span>[] errorMsg = <span class="keyword">new</span> <span class="keyword">String</span>[]&#123;<span class="string">"could not acquire the config lock "</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ssh服务器的ip地址</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> ip;</span><br><span class="line">    <span class="comment">//ssh服务器的登入端口</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> port;</span><br><span class="line">    <span class="comment">//ssh服务器的登入用户名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> user;</span><br><span class="line">    <span class="comment">//ssh服务器的登入密码</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> SshConnectTest(<span class="keyword">String</span> ip, <span class="built_in">int</span> port, <span class="keyword">String</span> user, <span class="keyword">String</span> password) &#123;</span><br><span class="line">        <span class="keyword">this</span>.ip = ip;</span><br><span class="line">        <span class="keyword">this</span>.port = port;</span><br><span class="line">        <span class="keyword">this</span>.user = user;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">        expect = getExpect();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 关闭SSH远程连接</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> disconnect() &#123;</span><br><span class="line">        <span class="keyword">if</span> (channel != <span class="keyword">null</span>) &#123;</span><br><span class="line">            channel.disconnect();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (session != <span class="keyword">null</span>) &#123;</span><br><span class="line">            session.disconnect();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获取服务器返回的信息</span><br><span class="line">     *</span><br><span class="line">     * @return 服务端的执行结果</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">String</span> getResponse() &#123;</span><br><span class="line">        <span class="keyword">return</span> buffer.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获得Expect4j对象，该对用可以往SSH发送命令请求</span></span><br><span class="line">    <span class="keyword">private</span> Expect4j getExpect() &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">log</span>.info(<span class="keyword">String</span>.format(<span class="string">"Start logging to %s@%s:%s"</span>, user, ip, port));</span><br><span class="line">            JSch jsch = <span class="keyword">new</span> JSch();</span><br><span class="line">            session = jsch.getSession(user, ip, port);</span><br><span class="line">            session.setPassword(password);</span><br><span class="line">            Hashtable&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; config = <span class="keyword">new</span> Hashtable&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;();</span><br><span class="line">            config.put(<span class="string">"StrictHostKeyChecking"</span>, <span class="string">"no"</span>);</span><br><span class="line">            session.setConfig(config);</span><br><span class="line">            localUserInfo ui = <span class="keyword">new</span> localUserInfo();</span><br><span class="line">            session.setUserInfo(ui);</span><br><span class="line">            session.connect();</span><br><span class="line">            channel = (ChannelShell) session.openChannel(<span class="string">"shell"</span>);</span><br><span class="line">            Expect4j expect = <span class="keyword">new</span> Expect4j(channel.getInputStream(), channel</span><br><span class="line">                    .getOutputStream());</span><br><span class="line">            channel.connect();</span><br><span class="line">            <span class="built_in">log</span>.info(<span class="keyword">String</span>.format(<span class="string">"Logging to %s@%s:%s successfully!"</span>, user, ip, port));</span><br><span class="line">            <span class="keyword">return</span> expect;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            <span class="built_in">log</span>.error(<span class="string">"Connect to "</span> + ip + <span class="string">":"</span> + port + <span class="string">"failed,please check your username and password!"</span>);</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 执行配置命令</span><br><span class="line">     *</span><br><span class="line">     * @param commands 要执行的命令，为字符数组</span><br><span class="line">     * @return 执行是否成功</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">boolean</span> executeCommands(<span class="keyword">String</span>[] commands) &#123;</span><br><span class="line">        <span class="comment">//如果expect返回为0，说明登入没有成功</span></span><br><span class="line">        <span class="keyword">if</span> (expect == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">log</span>.debug(<span class="string">"----------Running commands are listed as follows:----------"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">String</span> command : commands) &#123;</span><br><span class="line">            <span class="built_in">log</span>.info(command);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">log</span>.info(<span class="string">"----------End----------"</span>);</span><br><span class="line"></span><br><span class="line">        Closure closure = <span class="keyword">new</span> Closure() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> run(ExpectState expectState) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                <span class="built_in">log</span>.error(<span class="string">"print is : "</span>+expectState.getBuffer());</span><br><span class="line">                buffer.<span class="built_in">append</span>(expectState.getBuffer());<span class="comment">// buffer is string</span></span><br><span class="line">                <span class="comment">// buffer for appending</span></span><br><span class="line">                <span class="comment">// output of executed</span></span><br><span class="line">                <span class="comment">// command</span></span><br><span class="line">                expectState.exp_continue();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        List&lt;Match&gt; lstPattern = <span class="keyword">new</span> ArrayList&lt;Match&gt;();</span><br><span class="line">        <span class="keyword">String</span>[] regEx = linuxPromptRegEx;</span><br><span class="line">        <span class="keyword">if</span> (regEx != <span class="keyword">null</span> &amp;&amp; regEx.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (regEx) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">String</span> regexElement : regEx) &#123;<span class="comment">// list of regx like, :&gt;, /&gt;</span></span><br><span class="line">                    <span class="comment">// etc. it is possible</span></span><br><span class="line">                    <span class="comment">// command prompts of your</span></span><br><span class="line">                    <span class="comment">// remote machine</span></span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        RegExpMatch mat = <span class="keyword">new</span> RegExpMatch(regexElement, closure);</span><br><span class="line">                        lstPattern.<span class="built_in">add</span>(mat);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (MalformedPatternException e) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                lstPattern.<span class="built_in">add</span>(<span class="keyword">new</span> EofMatch(<span class="keyword">new</span> Closure() &#123; <span class="comment">// should cause</span></span><br><span class="line">                    <span class="comment">// entire page to be</span></span><br><span class="line">                    <span class="comment">// collected</span></span><br><span class="line">                    <span class="keyword">public</span> <span class="keyword">void</span> run(ExpectState state) &#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;));</span><br><span class="line">                lstPattern.<span class="built_in">add</span>(<span class="keyword">new</span> TimeoutMatch(defaultTimeOut, <span class="keyword">new</span> Closure() &#123;</span><br><span class="line">                    <span class="keyword">public</span> <span class="keyword">void</span> run(ExpectState state) &#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">boolean</span> isSuccess = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">String</span> strCmd : commands) &#123;</span><br><span class="line">                isSuccess = isSuccess(lstPattern, strCmd);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//防止最后一个命令执行不了</span></span><br><span class="line">            isSuccess = !checkResult(expect.expect(lstPattern));</span><br><span class="line"></span><br><span class="line">            <span class="comment">//找不到错误信息标示成功</span></span><br><span class="line">            <span class="keyword">String</span> response = buffer.toString().toLowerCase();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">String</span> msg : errorMsg) &#123;</span><br><span class="line">                <span class="keyword">if</span> (response.indexOf(msg) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> isSuccess;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//检查执行是否成功</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">boolean</span> isSuccess(List&lt;Match&gt; objPattern, <span class="keyword">String</span> strCommandPattern) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">boolean</span> isFailed = checkResult(expect.expect(objPattern));</span><br><span class="line">            <span class="keyword">if</span> (!isFailed) &#123;</span><br><span class="line">                expect.send(strCommandPattern);</span><br><span class="line">                expect.send(<span class="string">"\r"</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MalformedPatternException ex) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;  <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//检查执行返回的状态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">boolean</span> checkResult(<span class="built_in">int</span> intRetVal) &#123;</span><br><span class="line">        <span class="keyword">if</span> (intRetVal == COMMAND_EXECUTION_SUCCESS_OPCODE) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//登入SSH时的控制信息</span></span><br><span class="line">    <span class="comment">//设置不提示输入密码、不显示登入信息等</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> class localUserInfo implements UserInfo &#123;</span><br><span class="line">        <span class="keyword">String</span> passwd;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">String</span> getPassword() &#123;</span><br><span class="line">            <span class="keyword">return</span> passwd;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">boolean</span> promptYesNo(<span class="keyword">String</span> <span class="built_in">str</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">String</span> getPassphrase() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">boolean</span> promptPassphrase(<span class="keyword">String</span> message) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">boolean</span> promptPassword(<span class="keyword">String</span> message) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> showMessage(<span class="keyword">String</span> message) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        <span class="keyword">String</span> ip = <span class="string">"xxx.xxx.xxx.xx"</span>;</span><br><span class="line">        <span class="built_in">int</span> port = <span class="number">22</span>;</span><br><span class="line">        <span class="keyword">String</span> user =<span class="string">"root"</span>;</span><br><span class="line">        <span class="keyword">String</span> password = <span class="string">"password"</span>;</span><br><span class="line">        <span class="keyword">String</span>[] cmd = <span class="keyword">new</span> <span class="keyword">String</span>[]&#123;<span class="string">"cd /usr/local/mongodb/bin"</span>,<span class="string">"./mongo 10.117.27.133:30000"</span>&#125;;</span><br><span class="line">        <span class="comment">//String cmd1[] = &#123;"rs.status()"&#125;;</span></span><br><span class="line">        cmd = <span class="keyword">new</span> <span class="keyword">String</span>[]&#123;<span class="string">"ssh 10.117.27.133"</span>,<span class="string">"neiwang ssh密码"</span>,<span class="string">"ps aux|grep mongo"</span>,<span class="string">"ifconfig"</span>&#125;;</span><br><span class="line">        SshConnectTest ssh = <span class="keyword">new</span> SshConnectTest(ip,port,user,password);</span><br><span class="line">        <span class="comment">//SshConnectTest ssh1 = new SshConnectTest(ip,port,user,password);</span></span><br><span class="line">        ssh.executeCommands(cmd);</span><br><span class="line">        <span class="comment">//ssh.executeCommands(cmd1);</span></span><br><span class="line">        System.out.<span class="built_in">println</span>(ssh.getResponse());</span><br><span class="line">        ssh.disconnect();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要的jar</p>
+<ol>
+<li><a href="/2016/01/25/java-use-ssh-connact-linux/com.jcraft.jsch_0.1.31.jar" title="com.jcraft.jsch_0.1.31.jar">com.jcraft.jsch_0.1.31.jar</a></li>
+<li><a href="/2016/01/25/java-use-ssh-connact-linux/expect4j-1.6.jar" title="expect4j-1.6.jar">expect4j-1.6.jar</a></li>
+<li><a href="/2016/01/25/java-use-ssh-connact-linux/jakarta-oro-2.0.8.jar" title="jakarta-oro-2.0.8.jar">jakarta-oro-2.0.8.jar</a></li>
+<li><a href="/2016/01/25/java-use-ssh-connact-linux/slf4j-api.jar" title="slf4j-api.jar">slf4j-api.jar</a></li>
+<li><a href="/2016/01/25/java-use-ssh-connact-linux/slf4j-jdk14.jar" title="slf4j-jdk14.jar">slf4j-jdk14.jar</a></li>
+<li><a href="/2016/01/25/java-use-ssh-connact-linux/slf4j-log4j12.jar" title="slf4j-log4j12.jar">slf4j-log4j12.jar</a>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/IT技术/">IT技术</a>►<a class="article-category-link" href="/categories/IT技术/ssh/">ssh</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://chenbing8512.github.io/cbxjj/2016/01/25/java-use-ssh-connact-linux/" data-title="java连接ssh并使用shell命令 | chenbing&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/12/use-baiduMap-and-echarts-establish-new-region-map/"  title="使用百度地图自定义一个区划的地图">
+ <strong>下一篇:</strong><br/>
+ <span>使用百度地图自定义一个区划的地图
+</span>
+</a>
+</div>
+
+</nav>
+
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/IT技术/" title="IT技术">IT技术<sup>5</sup></a></li>
+		
+			<li><a href="/categories/IT技术/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/数据库/" title="数据库">数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/莹石云/" title="莹石云">莹石云<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/baiduMap/" title="baiduMap">baiduMap<sup>1</sup></a></li>
+		
+			<li><a href="/tags/jar/" title="jar">jar<sup>1</sup></a></li>
+		
+			<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		
+			<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+		
+			<li><a href="/tags/莹石云/" title="莹石云">莹石云<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/baiduMap/" style="font-size: 10px;">baiduMap</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/莹石云/" style="font-size: 10px;">莹石云</a>
+    </div>
+  </div>
+
+
+  <div class="tagslist">
+  <p class="asidetitle">最新评论</p>
+  <div class="entry">
+<!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="30"></div>
+<!-- 多说最新评论 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cbxjj"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+  </div>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://chenbing8512.github.io/cbxjj" target="_blank" title="chenbing">chenbing</a>
+		
+		</p>
+		<script type="text/javascript">
+		  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+		  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+		  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+		  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+		
+		  _st('install','bqvbse2y8PQ6VAym1soa','2.0.0');
+		</script>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"cbxjj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+<a id="returnTop" href="javascript:;">回到顶部</a>
+<script src="/js/totop.js"></script>
+
+
+  </body>
+</html>
