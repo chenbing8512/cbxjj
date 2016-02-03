@@ -29,22 +29,25 @@ cbxjj
 .git
 dir
 
+2015
+dir
+
 archives
 dir
 
 categories
 dir
 
-font
-dir
-
-2015
-dir
-
 css
 dir
 
 fancybox
+dir
+
+font
+dir
+
+img
 dir
 
 index.html
@@ -77,12 +80,9 @@ cbxjj
 
 
 
-
+Rejected commit: Default (2)
 
 5782
-
-img
-dir
 
 js
 dir
