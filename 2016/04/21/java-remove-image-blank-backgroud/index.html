@@ -1,0 +1,423 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用java去掉图片的黑色背景 | chenbing&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="chenbing">
+    
+    <meta name="description" content="需求做游戏从别人的客户端里面抠图出来,很多端游都是黑色背景的图片,不能直接用,用ps一个一个来又太麻烦了,比如下图:可以使用以下代码处理处理之后入下图:处理之后只有15K了1234567891011121314151617181920212223242526272829303132333435363">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="chenbing&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/author.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/author.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script>
+	(function(){
+	    var bp = document.createElement('script');
+	    bp.src = '//push.zhanzhang.baidu.com/push.js';
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+	</script>            
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/author.png" alt="chenbing&#39;s blog" title="chenbing&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="chenbing&#39;s blog">chenbing&#39;s blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+					
+						<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" class="st-default-search-input" maxlength="20" placeholder="搜索" />
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/21/java-remove-image-blank-backgroud/" title="使用java去掉图片的黑色背景" itemprop="url">使用java去掉图片的黑色背景</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://chenbing8512.github.io/cbxjj" title="chenbing">chenbing</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-04-21T03:05:38.000Z" itemprop="datePublished">2016-04-21</time>
+    更新日期:<time datetime="2016-04-21T03:16:41.242Z" itemprop="dateModified">2016-04-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u9700_u6C42"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li></ol>
+		</div>
+		
+		<h2 id="u9700_u6C42"><a href="#u9700_u6C42" class="headerlink" title="需求"></a>需求</h2><p>做游戏从别人的客户端里面抠图出来,很多端游都是黑色背景的图片,不能直接用,用ps一个一个来又太麻烦了,<br>比如下图:<br><img src="/2016/04/21/java-remove-image-blank-backgroud/jinjiao.bmp" alt="金角大王" title="金角大王"><br>可以使用以下代码处理<br>处理之后入下图:<br><img src="/2016/04/21/java-remove-image-blank-backgroud/jinjiao_s.png" alt="金角大王" title="金角大王"><br>处理之后只有15K了<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.Graphics;</span><br><span class="line"><span class="keyword">import</span> java.awt.Graphics2D;</span><br><span class="line"><span class="keyword">import</span> java.awt.GraphicsConfiguration;</span><br><span class="line"><span class="keyword">import</span> java.awt.GraphicsDevice;</span><br><span class="line"><span class="keyword">import</span> java.awt.GraphicsEnvironment;</span><br><span class="line"><span class="keyword">import</span> java.awt.HeadlessException;</span><br><span class="line"><span class="keyword">import</span> java.awt.Image;</span><br><span class="line"><span class="keyword">import</span> java.awt.Transparency;</span><br><span class="line"><span class="keyword">import</span> java.awt.<span class="built_in">image</span>.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> javax.swing.ImageIcon;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> class Alpha &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">byte</span>[] transferAlpha(Image <span class="built_in">image</span>) &#123;</span><br><span class="line">        ByteArrayOutputStream byteArrayOutputStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ImageIcon imageIcon = <span class="keyword">new</span> ImageIcon(<span class="built_in">image</span>);</span><br><span class="line">            BufferedImage bufferedImage = <span class="keyword">new</span> BufferedImage(imageIcon</span><br><span class="line">                    .getIconWidth(), imageIcon.getIconHeight(),</span><br><span class="line">                    BufferedImage.TYPE_4BYTE_ABGR);</span><br><span class="line">            Graphics2D g2D = (Graphics2D) bufferedImage.getGraphics();</span><br><span class="line">            g2D.drawImage(imageIcon.getImage(), <span class="number">0</span>, <span class="number">0</span>, imageIcon</span><br><span class="line">                    .getImageObserver());</span><br><span class="line">            <span class="built_in">int</span> <span class="built_in">alpha</span> = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> j1 = bufferedImage.getMinY(); j1 &lt; bufferedImage</span><br><span class="line">                    .getHeight(); j1++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> j2 = bufferedImage.getMinX(); j2 &lt; bufferedImage</span><br><span class="line">                        .getWidth(); j2++) &#123;</span><br><span class="line">                    <span class="built_in">int</span> rgb = bufferedImage.getRGB(j2, j1);</span><br><span class="line"> </span><br><span class="line">                    <span class="built_in">int</span> R =(rgb &amp; <span class="number">0xff0000</span> ) &gt;&gt; <span class="number">16</span> ;</span><br><span class="line">                <span class="built_in">int</span> G= (rgb &amp; <span class="number">0xff00</span> ) &gt;&gt; <span class="number">8</span> ;</span><br><span class="line">                <span class="built_in">int</span> B= (rgb &amp; <span class="number">0xff</span> );</span><br><span class="line">                <span class="comment">//if(((255-R)&lt;30) &amp;&amp; ((255-G)&lt;30) &amp;&amp; ((255-B)&lt;30))&#123; //去除白色背景；</span></span><br><span class="line">                <span class="keyword">if</span>(((<span class="number">255</span>-R)&gt;<span class="number">250</span>) &amp;&amp; ((<span class="number">255</span>-G)&gt;<span class="number">250</span>) &amp;&amp; ((<span class="number">255</span>-B)&gt;<span class="number">250</span>))&#123;<span class="comment">//去除黑色背景——dlgcy；</span></span><br><span class="line">                    rgb = ((<span class="built_in">alpha</span> + <span class="number">1</span>) &lt;&lt; <span class="number">24</span>) | (rgb &amp; <span class="number">0x00ffffff</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                bufferedImage.setRGB(j2, j1, rgb);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            g2D.drawImage(bufferedImage, <span class="number">0</span>, <span class="number">0</span>, imageIcon.getImageObserver());</span><br><span class="line">            <span class="comment">//ImageIO.write(bufferedImage, "png", new File("d:/test.png.png"));</span></span><br><span class="line">            ImageIO.write(bufferedImage, <span class="string">"png"</span>, byteArrayOutputStream);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> byteArrayOutputStream.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    </span><br><span class="line"> </span><br><span class="line">    <span class="comment">//byte[] ------&gt;BufferedImage</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> BufferedImage ByteToBufferedImage(<span class="built_in">byte</span>[] byteImage) <span class="keyword">throws</span> IOException&#123;</span><br><span class="line">        ByteArrayInputStream in = <span class="keyword">new</span> ByteArrayInputStream(byteImage);</span><br><span class="line">        BufferedImage buffImage = ImageIO.read(in);    </span><br><span class="line">        <span class="keyword">return</span> buffImage;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//Image转换为BufferedImage；</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> BufferedImage toBufferedImage(Image <span class="built_in">image</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">image</span> <span class="keyword">instanceof</span> BufferedImage) &#123;</span><br><span class="line">            <span class="keyword">return</span> (BufferedImage) <span class="built_in">image</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">image</span> = <span class="keyword">new</span> ImageIcon(<span class="built_in">image</span>).getImage();</span><br><span class="line">        <span class="built_in">boolean</span> hasAlpha = <span class="keyword">false</span>;</span><br><span class="line">        BufferedImage bimage = <span class="keyword">null</span>;</span><br><span class="line">        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">int</span> transparency = Transparency.OPAQUE;</span><br><span class="line">            <span class="keyword">if</span> (hasAlpha) &#123;</span><br><span class="line">                transparency = Transparency.BITMASK;</span><br><span class="line">            &#125;</span><br><span class="line">            GraphicsDevice gs = ge.getDefaultScreenDevice();</span><br><span class="line">            GraphicsConfiguration gc = gs.getDefaultConfiguration();</span><br><span class="line">            bimage = gc.createCompatibleImage(<span class="built_in">image</span>.getWidth(<span class="keyword">null</span>),</span><br><span class="line">                    <span class="built_in">image</span>.getHeight(<span class="keyword">null</span>), transparency);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (HeadlessException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (bimage == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="built_in">int</span> type = BufferedImage.TYPE_INT_RGB;</span><br><span class="line">            <span class="keyword">if</span> (hasAlpha) &#123;</span><br><span class="line">                type = BufferedImage.TYPE_INT_ARGB;</span><br><span class="line">            &#125;</span><br><span class="line">            bimage = <span class="keyword">new</span> BufferedImage(<span class="built_in">image</span>.getWidth(<span class="keyword">null</span>),</span><br><span class="line">                    <span class="built_in">image</span>.getHeight(<span class="keyword">null</span>), type);</span><br><span class="line">        &#125;</span><br><span class="line">        Graphics g = bimage.<span class="built_in">createGraphics</span>();</span><br><span class="line">        g.drawImage(<span class="built_in">image</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line">        g.dispose();</span><br><span class="line">        <span class="keyword">return</span> bimage;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    	Long start = System.currentTimeMillis();</span><br><span class="line">    	<span class="keyword">String</span> imgPath = <span class="string">"C:\\Users\\Administrator\\Desktop\\jinjiao.bmp"</span>;</span><br><span class="line">    	BufferedImage <span class="built_in">image</span> = ImageIO.read(<span class="keyword">new</span> FileInputStream(imgPath));</span><br><span class="line">    	BufferedImage newImg = ByteToBufferedImage(transferAlpha(<span class="built_in">image</span>));</span><br><span class="line">        ImageIO.write(newImg, <span class="string">"png"</span>,<span class="keyword">new</span> File(<span class="string">"C:\\Users\\Administrator\\Desktop\\jinjiao_s.png"</span>));</span><br><span class="line">    	Long end = System.currentTimeMillis();</span><br><span class="line">    	System.out.<span class="built_in">println</span>(end - start);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/IT技术/">IT技术</a>►<a class="article-category-link" href="/categories/IT技术/java/">java</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://chenbing8512.github.io/cbxjj/2016/04/21/java-remove-image-blank-backgroud/" data-title="使用java去掉图片的黑色背景 | chenbing&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/27/libgdx绘制扇形和圆角矩形/"  title="【libgdx】绘制扇形和圆角矩形">
+ <strong>下一篇:</strong><br/>
+ <span>【libgdx】绘制扇形和圆角矩形
+</span>
+</a>
+</div>
+
+</nav>
+
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u9700_u6C42"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/IT技术/" title="IT技术">IT技术<sup>7</sup></a></li>
+		
+			<li><a href="/categories/IT技术/java/" title="java">java<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/libgdx/" title="libgdx">libgdx<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/ssh/" title="ssh">ssh<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/数据库/" title="数据库">数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/IT技术/莹石云/" title="莹石云">莹石云<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/baiduMap/" title="baiduMap">baiduMap<sup>1</sup></a></li>
+		
+			<li><a href="/tags/jar/" title="jar">jar<sup>1</sup></a></li>
+		
+			<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
+		
+			<li><a href="/tags/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+		
+			<li><a href="/tags/libgdx/" title="libgdx">libgdx<sup>1</sup></a></li>
+		
+			<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+		
+			<li><a href="/tags/莹石云/" title="莹石云">莹石云<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/baiduMap/" style="font-size: 10px;">baiduMap</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/libgdx/" style="font-size: 10px;">libgdx</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/莹石云/" style="font-size: 10px;">莹石云</a>
+    </div>
+  </div>
+
+
+  <div class="tagslist">
+  <p class="asidetitle">最新评论</p>
+  <div class="entry">
+<!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="30"></div>
+<!-- 多说最新评论 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cbxjj"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+  </div>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://chenbing8512.github.io/cbxjj" target="_blank" title="chenbing">chenbing</a>
+		
+		</p>
+		<script type="text/javascript">
+		  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+		  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+		  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+		  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+		
+		  _st('install','bqvbse2y8PQ6VAym1soa','2.0.0');
+		</script>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"cbxjj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+<a id="returnTop" href="javascript:;">回到顶部</a>
+<script src="/js/totop.js"></script>
+
+
+  </body>
+</html>
