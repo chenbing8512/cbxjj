@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>java jar包备份 | chenbing&#39;s blog</title>
+    <title>fis3使用说明 | chenbing&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="chenbing">
     
-    <meta name="description" content="DJNativeSwing-SWT 是一个跨平台的浏览器、Flash播放器、HTML编辑器和多媒体播放器组件。bootstrap 简洁、直观、强悍、移动设备优先的前端开发框架。fancybox 是一款优秀的jquery插件,它能够展示丰富的弹出层效果。">
+    <meta name="description" content="最近使用html5写了几个给android调用的页面,发现修改过后的JS和CSS的缓存很难清掉,不可能让用户手动去清缓存,url地址后面手动修改版本号也不好使,网上找一下，找到fis3这个JS的构建工具，能很好的解决这个问题,fis官网：http://fis.baidu.com/
+安装1.安装nod">
     
     
     
@@ -74,15 +75,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/28/java-jars-backup/" title="java jar包备份" itemprop="url">java jar包备份</a>
+      <a href="/2016/07/20/fis3使用说明/" title="fis3使用说明" itemprop="url">fis3使用说明</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://chenbing8512.github.io/cbxjj" title="chenbing">chenbing</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-12-28T03:30:32.000Z" itemprop="datePublished">2015-12-28</time>
-    更新日期:<time datetime="2016-01-20T03:43:39.116Z" itemprop="dateModified">2016-01-20</time>
+    <time datetime="2016-07-20T02:15:41.000Z" itemprop="datePublished">2016-07-20</time>
+    更新日期:<time datetime="2016-07-20T02:31:20.242Z" itemprop="dateModified">2016-07-20</time>
     
   </p>
 </header>
@@ -91,30 +92,33 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li></ol>
 		</div>
 		
-		<p><a href="/2015/12/28/java-jars-backup/DJNativeSwing-SWT-1-0-3-20140708.zip" title="DJNativeSwing-SWT">DJNativeSwing-SWT</a> 是一个跨平台的浏览器、Flash播放器、HTML编辑器和多媒体播放器组件。<br><a href="/2015/12/28/java-jars-backup/bootstrap-3.3.5-dist.zip" title="bootstrap">bootstrap</a> 简洁、直观、强悍、移动设备优先的前端开发框架。<br><a href="/2015/12/28/java-jars-backup/fancyapps-fancyBox-v2.1.5-0-ge2248f4.zip" title="fancybox">fancybox</a> 是一款优秀的jquery插件,它能够展示丰富的弹出层效果。</p>
+		<p>最近使用html5写了几个给android调用的页面,发现修改过后的JS和CSS的缓存很难清掉,不可能让用户手动去清缓存,url地址后面手动修改版本号也不好使,网上找一下，找到fis3这个JS的构建工具，能很好的解决这个问题,fis官网：<a href="http://fis.baidu.com/" target="_blank" rel="external">http://fis.baidu.com/</a></p>
+<h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><p>1.安装nodejs,Node 版本要求 0.8.x，0.10.x, 0.12.x，4.x，6.x<br>2.安装fis3,<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">npm install -g fis3</span><br><span class="line">安装完成使用命令</span><br><span class="line"><span class="formula">$ fis3 -v</span><br><span class="line"> <span class="special">[</span>INFO<span class="special">]</span> Currently running fis3 (/Users/Your/Dev/fis3/dev/fis3)</span><br><span class="line"></span><br><span class="line">  v3.0.0</span><br><span class="line"></span><br><span class="line">   /<span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\ </span> /<span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\ </span>    /<span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\</span><br><span class="line"></span>   <span class="command">\/</span><span class="command">\\</span><span class="command">\/</span>//////////  <span class="command">\/</span>////<span class="command">\\</span><span class="command">\/</span>//    /<span class="command">\\</span><span class="command">\/</span>////////<span class="command">\\</span><span class="command">\</span><br><span class="line"></span>    <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>                <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>     <span class="command">\/</span>/<span class="command">\\</span><span class="command">\ </span>     <span class="command">\/</span>//</span><br><span class="line">     <span class="command">\/</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\ </span>        <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>      <span class="command">\/</span>///<span class="command">\\</span><span class="command">\</span><br><span class="line"></span>      <span class="command">\/</span><span class="command">\\</span><span class="command">\/</span>//////          <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>         <span class="command">\/</span>///<span class="command">\\</span><span class="command">\</span><br><span class="line"></span>       <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>                <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>            <span class="command">\/</span>///<span class="command">\\</span><span class="command">\</span><br><span class="line"></span>        <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>                <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>     /<span class="command">\\</span><span class="command">\ </span>     <span class="command">\/</span>/<span class="command">\\</span><span class="command">\</span><br><span class="line"></span>         <span class="command">\/</span><span class="command">\\</span><span class="command">\ </span>             /<span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\ </span><span class="command">\/</span>//<span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\\</span><span class="command">\/</span></span><br><span class="line">          <span class="command">\/</span>//              <span class="command">\/</span>//////////    <span class="command">\/</span>//////////</span></span><br></pre></td></tr></table></figure><br>显示以上内容标识fis3安装成功！</p>
+<p>##构建<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fis3 <span class="operator"><span class="keyword">release</span> -<span class="keyword">d</span> &lt;<span class="keyword">path</span>&gt;</span></span><br></pre></td></tr></table></figure><br>.<path></path> 任意目录<br>.fis3 release -h 获取更多参数</p>
+<p>根目录下新建一个配置文件fis-conf.js<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">fis</span><span class="class">.match</span>(<span class="string">'::packager'</span>, &#123;</span><br><span class="line">  <span class="attribute">spriter</span>: fis.<span class="function">plugin</span>(<span class="string">'csssprites'</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="tag">fis</span><span class="class">.match</span>(<span class="string">'*'</span>, &#123;</span><br><span class="line">   <span class="attribute">useHash</span>: false</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="tag">fis</span><span class="class">.match</span>(<span class="string">'*.js'</span>, &#123;</span><br><span class="line">  <span class="attribute">useHash</span>: true,</span><br><span class="line">  <span class="attribute">optimizer</span>: null<span class="comment">//fis.plugin('uglify-js')</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="tag">fis</span><span class="class">.match</span>(<span class="string">'*.css'</span>, &#123;</span><br><span class="line">  <span class="attribute">useHash</span>: true,</span><br><span class="line">  <span class="attribute">useSprite</span>: true,</span><br><span class="line">  <span class="attribute">optimizer</span>: fis.<span class="function">plugin</span>(<span class="string">'clean-css'</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="tag">fis</span><span class="class">.match</span>(<span class="string">'*.png'</span>, &#123;</span><br><span class="line">  <span class="attribute">useHash</span>: true,</span><br><span class="line">  <span class="attribute">optimizer</span>: null<span class="comment">//fis.plugin('png-compressor')</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br>useHash等于true代表此类型的文件名会被hash重命名，<br>useSprite对图片进行压缩合并，<br>optimizer使用插件比如css\js压缩等</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/jar/">jar</a><a href="/tags/java/">java</a>
+  <span></span> <a href="/tags/javascript/">javascript</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/IT技术/">IT技术</a>
+  <a class="article-category-link" href="/categories/fis3/">fis3</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://chenbing8512.github.io/cbxjj/2015/12/28/java-jars-backup/" data-title="java jar包备份 | chenbing&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://chenbing8512.github.io/cbxjj/2016/07/20/fis3使用说明/" data-title="fis3使用说明 | chenbing&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -123,19 +127,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/12/use-baiduMap-and-echarts-establish-new-region-map/" title="使用百度地图自定义一个区划的地图">
-  <strong>上一篇:</strong><br/>
-  <span>
-  使用百度地图自定义一个区划的地图</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/12/25/use-yingshiyun-check-local-camera/"  title="使用莹石云调取本地摄像头">
+<a href="/2016/04/21/echarts-three地图下钻至区县/"  title="echarts3地图下钻至区县">
  <strong>下一篇:</strong><br/>
- <span>使用莹石云调取本地摄像头
+ <span>echarts3地图下钻至区县
 </span>
 </a>
 </div>
@@ -153,7 +149,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u88C5"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li></ol>
   </div>
 
 <div id="asidepart">
